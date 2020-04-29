@@ -1,0 +1,12 @@
+name: create
+on: 
+  create:
+    branches: test/**
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check
+        run: echo create ${{ github.ref }}
+  
