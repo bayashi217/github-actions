@@ -2,8 +2,8 @@ name: pull-request
 
 on:
   pull_request:
-    master:
-      types: [synchronize]
+    branches: master
+    types: [synchronize, edit]
 
 jobs:
   pull-request-if-wip:
