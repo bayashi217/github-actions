@@ -1,0 +1,24 @@
+name: pull-request
+
+on:
+  pull_request:
+    master:
+      types: [synchronize]
+
+jobs:
+  pull-request-if-wip:
+    if: startsWith(github.event.pull_request.title, '[WIP]') && contains(github.event.pull_request.head.ref, 'test/pull')
+    runs-on: ubuntu-latest
+    steps:
+      - name: comment
+        uses: actions/github-script@0.9.0
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.pulls.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              body: 'Hello!'
+            })
+      
