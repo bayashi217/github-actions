@@ -33,7 +33,7 @@ jobs:
             github.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: branch + ': 作成',
-              head: branch,
+              title: `${branch}` + ': 作成',
+              head: `${branch}`,
               base: "master"
             });
