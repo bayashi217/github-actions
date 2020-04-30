@@ -30,6 +30,7 @@ jobs:
           branch: ${HEAD_REF#refs\/heads\//}
           script: |
             const branch = core.getInput('branch', {required: true});
+            console.log(branch)
             github.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
