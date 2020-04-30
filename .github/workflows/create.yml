@@ -32,6 +32,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "[${HEAD_REF#*test/}]: 作成",
-              head: "${HEAD_REF#*test/test}",
+              head: "action:${HEAD_REF#*test/test}",
               base: "master"
             });
