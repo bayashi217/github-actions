@@ -18,6 +18,8 @@ jobs:
 
       - name: start commit
         run: |
+          git config --global user.email "workflow@example.com"
+          git config --global user.name "workflow user"
           git commit --allow-empty -m "[${HEAD_REF#*test/}]: 作成" && git push ${REPO} HEAD:${HEAD_REF} || true
 
       - name: create pull request
@@ -29,6 +31,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "[${HEAD_REF#*test/}]: 作成",
-              head: ${HEAD_REF},
+              head: "${HEAD_REF}",
               base: "master"
             });
