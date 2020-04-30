@@ -27,12 +27,13 @@ jobs:
         uses: actions/github-script@0.9.0
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          ref: ${HEAD_REF#*test/}
+          branch: ${HEAD_REF#refs\/heads\//}
           script: |
+            var branch = core.getInput('branch', {required: true})
             github.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: ref + ': 作成',
-              head: 'action:test/' + ref,
+              title: branch + ': 作成',
+              head: 'action:test/' + branch,
               base: "master"
             });
