@@ -18,11 +18,12 @@ jobs:
 
       - name: start commit
         run: |
-          git config --global user.email "workflow@example.com"
-          git config --global user.name "workflow user"
-          git commit --allow-empty -m "[${HEAD_REF#*test/}]: 作成" && git push ${REPO} HEAD:${HEAD_REF} || true
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git commit --allow-empty -m "[${HEAD_REF#*test/}]: 作成" && git push ${REPO} HEAD:${HEAD_REF}
 
       - name: create pull request
+        if: success()
         uses: actions/github-script@0.9.0
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
@@ -31,6 +32,6 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "[${HEAD_REF#*test/}]: 作成",
-              head: "${HEAD_REF}",
+              head: "${HEAD_REF#*test/test}",
               base: "master"
             });
