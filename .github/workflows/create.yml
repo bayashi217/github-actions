@@ -29,11 +29,11 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           branch: ${HEAD_REF#refs\/heads\//}
           script: |
-            var branch = core.getInput('branch', {required: true})
+            const branch = core.getInput('branch', {required: true});
             github.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: branch + ': 作成',
-              head: 'action:test/' + branch,
+              head: branch,
               base: "master"
             });
