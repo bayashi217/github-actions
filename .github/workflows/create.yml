@@ -12,8 +12,8 @@ jobs:
   steps:
     - name: checkout
       uses: actions/checkout@v2
-        with:
-          ref: ${{github.event.pull_request.head.ref}}
+      with:
+        ref: ${{github.event.pull_request.head.ref}}
 
     - name: start commit
       run: |
@@ -21,14 +21,14 @@ jobs:
 
     - name: create pull request
       uses: actions/github-script@0.9.0
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: "[${HEAD_REF#*test/}]: 作成",
-              head: ${HEAD_REF},
-              base: "master"
-            });
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.pulls.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: "[${HEAD_REF#*test/}]: 作成",
+            head: ${HEAD_REF},
+            base: "master"
+          });
   
